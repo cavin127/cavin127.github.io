@@ -1,0 +1,69 @@
+<div class="card-container">
+  <div class="card" *ngFor="let team of resultArrayNew">
+    <div class="row">
+      <div class="column">
+        <h3>{{ team?.teams?.full_name }} [{{ team?.teams?.abbreviation }}]</h3>
+      </div>
+      <div class="column">
+        <a id="delete{{ team?.teams?.abbreviation }}"
+          ><img
+            class="alignImage"
+            (click)="deleteTeam(team?.teams?.id || '', resultArrayNew)"
+            src="./../../../assets/images/close.svg"
+            alt="Delete"
+        /></a>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <span class="alignConference"
+          >{{ team?.conference }} {{ conferenceText }}
+        </span>
+      </div>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="row">
+      <div class="column">
+        <div class="row">{{ past12daysText }}</div>
+        <div class="row-stats">
+          <span
+            [ngClass]="stats === 'W' ? 'redStat' : 'greenStat'"
+            *ngFor="let stats of team.stats"
+            >{{ stats }}</span
+          >
+        </div>
+
+        <div class="column">
+          {{ avgPointsScoredText }} <b>{{ team?.average_points_scored }}</b>
+        </div>
+        <div class="column">
+          {{ avgPointsConcededText }} <b>{{ team?.average_points_conceded }}</b>
+        </div>
+      </div>
+      <div class="column">
+        <div class="spanGap">
+          <img
+            class="alignTeamImage"
+            src="https://interstate21.com/nba-logos/{{
+              team?.teams?.abbreviation
+            }}.png"
+            alt="TeamLogo"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <button
+          [routerLink]="['/results', team?.teams?.id || '']"
+          id="results{{ team?.teams?.abbreviation }}"
+          class="btn btn-primary btn-round-1"
+        >
+          {{ seeGameResultsText }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

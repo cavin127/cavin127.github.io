@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="item" *ngIf="teams$ | async as team">
+    <select
+      #teams
+      (change)="onSelected(teams.value)"
+      name="teamInput"
+      class="selectBox"
+    >
+      <option default disabled selected="selected">
+        {{ selectTeamButtonText }}
+      </option>
+      <option *ngFor="let teams of team.data" [value]="teams.id">
+        {{ teams.full_name }}
+      </option>
+    </select>
+  </div>
+  <div class="item">
+    <button
+      id="trackBtn"
+      (click)="trackTeam(selectedTeam)"
+      class="btn btn-primary btn-round-1"
+    >
+      {{ trackTeamButtonText }}
+    </button>
+  </div>
+</div>
+<div class="list-teams" *ngIf="teamId">
+  <app-list-teams [team]="teamId"></app-list-teams>
+</div>

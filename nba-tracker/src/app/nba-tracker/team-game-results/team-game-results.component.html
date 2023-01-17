@@ -1,0 +1,47 @@
+<div class="card-container">
+  <div class="card" *ngIf="resultArrayNew">
+    <div class="row">
+      <div class="column">
+        <h3>
+          {{ resultArrayNew?.teams?.full_name }} [{{
+            resultArrayNew?.teams?.abbreviation
+          }}]
+        </h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column">
+        <span class="alignConference"
+          >{{ resultArrayNew?.conference }} {{ conferenceText }}
+        </span>
+      </div>
+    </div>
+    <div class="line"></div>
+    <div class="row">
+      <div class="column">
+        <div class="row">{{ past12daysText }}</div>
+        <div class="row" *ngFor="let data of resultArrayNew?.games?.data">
+          <div class="column">
+            <b>{{ data?.home_team?.abbreviation }}</b> -
+            {{ data?.home_team_score }}
+          </div>
+          <div class="column">
+            <b>{{ data?.visitor_team?.abbreviation }}</b> -
+            {{ data?.visitor_team_score }}
+          </div>
+        </div>
+        <div class="row">
+          <div class="column">
+            <button
+              id="backBtn"
+              (click)="backToTeamStats()"
+              class="btn btn-primary btn-round-1"
+            >
+              {{ backButtonText }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
