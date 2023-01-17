@@ -29,7 +29,7 @@
         <div class="row">{{ past12daysText }}</div>
         <div class="row-stats">
           <span
-            [ngClass]="stats === 'W' ? 'redStat' : 'greenStat'"
+            [ngClass]="stats === 'W' ? 'greenStat' : 'redStat'"
             *ngFor="let stats of team.stats"
             >{{ stats }}</span
           >
