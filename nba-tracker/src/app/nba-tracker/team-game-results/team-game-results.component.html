@@ -22,12 +22,11 @@
         <div class="row">{{ past12daysText }}</div>
         <div class="row" *ngFor="let data of resultArrayNew?.games?.data">
           <div class="column">
-            <b>{{ data?.home_team?.abbreviation }}</b> -
+            <b>{{ data?.home_team?.abbreviation }}</b>
             {{ data?.home_team_score }}
-          </div>
-          <div class="column">
-            <b>{{ data?.visitor_team?.abbreviation }}</b> -
+            -
             {{ data?.visitor_team_score }}
+            <b>{{ data?.visitor_team?.abbreviation }}</b>
           </div>
         </div>
         <div class="row">
