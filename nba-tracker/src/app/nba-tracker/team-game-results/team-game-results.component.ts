@@ -59,7 +59,6 @@ export class TeamGameResultsComponent implements OnInit {
         };
         if (resultArray) {
           this.resultArrayNew = resultArray;
-          console.log(this.resultArrayNew);
         }
       });
     });
