@@ -18,7 +18,6 @@ export class AppComponent implements OnDestroy {
         browserRefresh = !router.navigated;
         if (browserRefresh) {
           localStorage.removeItem('resultSet');
-          localStorage.removeItem('deleteResultSet');
         }
       }
     });

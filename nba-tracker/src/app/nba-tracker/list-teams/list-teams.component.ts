@@ -62,15 +62,7 @@ export class ListTeamsComponent implements OnChanges, OnInit {
   }
 
   ngOnInit() {
-    if (localStorage.getItem('deleteResultSet')) {
-      this.resultArrayNew = JSON.parse(
-        localStorage.getItem('deleteResultSet') || ''
-      );
-    }
-    if (
-      localStorage.getItem('resultSet') &&
-      !localStorage.getItem('deleteResultSet')
-    ) {
+    if (localStorage.getItem('resultSet')) {
       this.resultArrayNew = JSON.parse(localStorage.getItem('resultSet') || '');
     }
   }
@@ -109,9 +101,9 @@ export class ListTeamsComponent implements OnChanges, OnInit {
     const requiredIndex = result.findIndex((el) => {
       return el.teams.id === teamid;
     });
-
     const data = result.splice(requiredIndex, 1);
-    localStorage.setItem('deleteResultSet', JSON.stringify(result));
+    localStorage.removeItem('resultSet');
+    localStorage.setItem('resultSet', JSON.stringify(result));
     return data;
   }
 
