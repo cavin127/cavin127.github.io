@@ -54,9 +54,16 @@ export class ListTeamsComponent implements OnChanges, OnInit {
           conference: this.getConference(teams),
         };
 
-        this.resultArrayNew.push(resultArray);
-        localStorage.setItem('resultSet', JSON.stringify(this.resultArrayNew));
-        console.log(this.resultArrayNew);
+        const findValueExists = this.resultArrayNew.findIndex(
+          (data) => data.teams.id === resultArray.teams.id
+        );
+        if (findValueExists === -1) {
+          this.resultArrayNew.push(resultArray);
+          localStorage.setItem(
+            'resultSet',
+            JSON.stringify(this.resultArrayNew)
+          );
+        }
       });
     }
   }
