@@ -3,10 +3,6 @@ import { Observable } from 'rxjs';
 import { Teams, Team } from 'src/app/shared/models/teams.model';
 import { NbaTrackerService } from 'src/app/shared/services/nba-tracker.service';
 
-interface Food {
-  value: string;
-  viewValue: string;
-}
 @Component({
   selector: 'app-select-team',
   templateUrl: './select-team.component.html',
@@ -18,6 +14,8 @@ export class SelectTeamComponent implements OnInit {
   getTeamById?: Team;
   resultArray: Team[] = [];
   teamId?: string | null;
+  sessionFlag?: string | null;
+  buttonFlag?: boolean = false;
   selectTeamButtonText: string = 'Pick a team';
   trackTeamButtonText: string = 'Track Team';
 
@@ -25,7 +23,7 @@ export class SelectTeamComponent implements OnInit {
 
   ngOnInit(): void {
     if (localStorage.getItem('teamId')) {
-      this.teamId = localStorage.getItem('teamId');
+      this.sessionFlag = localStorage.getItem('teamId');
       localStorage.removeItem('teamId');
     }
 
@@ -37,6 +35,7 @@ export class SelectTeamComponent implements OnInit {
   }
 
   trackTeam(team: string) {
+    this.buttonFlag = true;
     if (team) {
       this.teamId = team;
     }

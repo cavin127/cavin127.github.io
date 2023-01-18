@@ -27,3 +27,6 @@
 <div class="list-teams" *ngIf="teamId">
   <app-list-teams [team]="teamId"></app-list-teams>
 </div>
+<div class="list-teams" *ngIf="sessionFlag && !buttonFlag">
+  <app-list-teams></app-list-teams>
+</div>

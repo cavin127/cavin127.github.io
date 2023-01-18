@@ -20,7 +20,7 @@ export class TeamGameResultsComponent implements OnInit {
   getTeam$?: Observable<Team>;
   getGames$?: Observable<Games>;
   resultArrayNew?: TeamGamesWrapper;
-  backButtonText: string = '<< Back to all team stats';;
+  backButtonText: string = '<< Back to all team stats';
   past12daysText: string = 'Scores of past 12 days';
   conferenceText: string = 'Conference';
 
@@ -48,7 +48,7 @@ export class TeamGameResultsComponent implements OnInit {
 
       const joinStream = combineLatest(this.getTeam$, this.getGames$);
 
-      const subscribe = joinStream.subscribe(([teams, games]) => {
+      joinStream.subscribe(([teams, games]) => {
         let resultArray: TeamGamesWrapper = {
           teams,
           games,

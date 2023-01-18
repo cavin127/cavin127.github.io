@@ -1,5 +1,5 @@
 import * as moment from 'moment';
-import { Component, Input, OnChanges } from '@angular/core';
+import { Component, Input, OnChanges, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { combineLatest, Observable } from 'rxjs';
 import {
@@ -14,7 +14,7 @@ import { NbaTrackerService } from 'src/app/shared/services/nba-tracker.service';
   templateUrl: './list-teams.component.html',
   styleUrls: ['./list-teams.component.css'],
 })
-export class ListTeamsComponent implements OnChanges {
+export class ListTeamsComponent implements OnChanges, OnInit {
   resultArrayNew: TeamGamesWrapper[] = [];
   average_points_scored?: string;
   average_points_conceded?: string;
@@ -55,7 +55,23 @@ export class ListTeamsComponent implements OnChanges {
         };
 
         this.resultArrayNew.push(resultArray);
+        localStorage.setItem('resultSet', JSON.stringify(this.resultArrayNew));
+        console.log(this.resultArrayNew);
       });
+    }
+  }
+
+  ngOnInit() {
+    if (localStorage.getItem('deleteResultSet')) {
+      this.resultArrayNew = JSON.parse(
+        localStorage.getItem('deleteResultSet') || ''
+      );
+    }
+    if (
+      localStorage.getItem('resultSet') &&
+      !localStorage.getItem('deleteResultSet')
+    ) {
+      this.resultArrayNew = JSON.parse(localStorage.getItem('resultSet') || '');
     }
   }
 
@@ -93,7 +109,10 @@ export class ListTeamsComponent implements OnChanges {
     const requiredIndex = result.findIndex((el) => {
       return el.teams.id === teamid;
     });
-    return result.splice(requiredIndex, 1);
+
+    const data = result.splice(requiredIndex, 1);
+    localStorage.setItem('deleteResultSet', JSON.stringify(result));
+    return data;
   }
 
   getPrevDates() {
